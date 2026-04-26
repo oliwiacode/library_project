@@ -1,0 +1,24 @@
+Package: salesToolkit
+Type: Package
+Title: Sales Time Series Analysis Toolkit
+Version: 0.1.0
+Authors@R: c(
+    person("Oliwia", "Olszewska",
+           email = "o.olszewska.biz@gmail.com",
+           role = c("aut", "cre")),
+    person("Magdalena", "Miłek",
+           role = "aut"))
+Description: Tools for loading, cleaning, analyzing and forecasting sales time series data used in retail analytics.
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Imports:
+    dplyr,
+    ggplot2,
+    lubridate,
+    forecast,
+    prophet,
+    zoo,
+    readr,
+    tidyr
+RoxygenNote: 7.3.3
