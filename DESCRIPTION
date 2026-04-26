@@ -20,5 +20,6 @@ Imports:
     prophet,
     zoo,
     readr,
-    tidyr
+    tidyr,
+    magrittr
 RoxygenNote: 7.3.3
