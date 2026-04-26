@@ -5,6 +5,12 @@
 #' @export
 load_sales_data <- function(path) {
 
-  readr::read_csv(path) %>%
-    dplyr::mutate(date = lubridate::ymd(date))
+  data <- readr::read_csv(path)
+
+  data <- dplyr::mutate(
+    data,
+    date = lubridate::ymd(date)
+  )
+
+  return(data)
 }
