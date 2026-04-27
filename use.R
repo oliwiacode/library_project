@@ -1,5 +1,5 @@
 ## jak użyć naszego pakietu
-## najpierw instaluję pakiet
+## najpierw instaluję pakiet..
 library(salesToolkit)
 
 ## wczytuje dane
