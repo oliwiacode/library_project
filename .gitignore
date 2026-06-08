@@ -4,3 +4,6 @@
 .Ruserdata
 data/
 train.csv
+*.csv
+.DS_Store
+inst/.DS_Store
