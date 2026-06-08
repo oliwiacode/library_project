@@ -22,7 +22,7 @@ danych. salesToolkit zamyka cały ten proces w spójnym zestawie funkcji:
 
 ---
 
-## Instalacja
+## 📦 Instalacja
 
 ```r
 # install.packages("devtools")
@@ -69,7 +69,7 @@ Pełny scenariusz end-to-end:
 
 ---
 
-## Funkcje
+## 🧩 Funkcje
 
 ### Dane: wczytanie i jakość
 
@@ -101,7 +101,7 @@ Pełny scenariusz end-to-end:
 
 ---
 
-## Raport
+## 📈 Raport
 
 Gotowy do wyrenderowania raport analityczny — trendy sprzedaży, skuteczność
 promocji, porównanie formatów sklepów oraz prognoza ARIMA vs Prophet:
@@ -117,7 +117,7 @@ Plik źródłowy: `inst/report/sales_report.Rmd`.
 
 ---
 
-## Źródło danych
+## 🗂️ Źródło danych
 
 Pakiet jest dostosowany do struktury danych
 [**Store Sales — Time Series Forecasting**](https://www.kaggle.com/competitions/store-sales-time-series-forecasting) (Kaggle).
