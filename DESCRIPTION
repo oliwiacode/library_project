@@ -14,12 +14,20 @@ Encoding: UTF-8
 LazyData: true
 Imports:
     dplyr,
-    ggplot2,
+    tidyr,
+    readr,
     lubridate,
+    ggplot2,
+    zoo,
+    purrr,
+    rlang,
     forecast,
     prophet,
-    zoo,
-    readr,
-    tidyr,
-    magrittr
+    magrittr,
+    stats,
+    utils
+Suggests:
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr
 RoxygenNote: 7.3.3

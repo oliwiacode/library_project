@@ -2,16 +2,24 @@
 % Please edit documentation in R/plots.R
 \name{plot_sales_trends}
 \alias{plot_sales_trends}
-\title{Plot sales trends}
+\title{Wykres trendu sprzedazy}
 \usage{
-plot_sales_trends(df)
+plot_sales_trends(df, group = NULL, smooth = TRUE, title = "Trend sprzedazy")
 }
 \arguments{
-\item{df}{dataframe}
+\item{df}{ramka danych ze sprzedaza.}
+
+\item{group}{opcjonalna nazwa kolumny do podzialu (np. "type", "family").
+Jesli podana, kazda grupa to osobna kolorowa linia.}
+
+\item{smooth}{czy dodac wygladzona linie trendu (geom_smooth). Domyslnie TRUE.}
+
+\item{title}{tytul wykresu.}
 }
 \value{
-ggplot
+obiekt ggplot.
 }
 \description{
-Plot sales trends
+Agreguje sprzedaz do sumy dziennej (opcjonalnie w podziale na wybrana
+zmienna metadanych), dzieki czemu linia jest czytelna takze dla panelu.
 }

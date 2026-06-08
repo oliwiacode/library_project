@@ -2,16 +2,20 @@
 % Please edit documentation in R/summary.R
 \name{create_management_summary}
 \alias{create_management_summary}
-\title{Create management summary}
+\title{Podsumowanie biznesowe dla menedzera}
 \usage{
-create_management_summary(df)
+create_management_summary(df, recent_days = 30)
 }
 \arguments{
-\item{df}{dataframe}
+\item{df}{ramka danych ze sprzedaza.}
+
+\item{recent_days}{dlugosc "ostatniego okresu" w dniach (domyslnie 30).}
 }
 \value{
-list
+lista z elementami podsumowania.
 }
 \description{
-Create management summary
+Liczy: najlepszy/najgorszy sklep (wg sprzedazy calkowitej), najszybciej
+rosnaca i najmocniej spadajaca kategorie (ostatni okres vs poprzedni okres)
+oraz srednia sprzedaz dzienna w ostatnim okresie.
 }

@@ -2,16 +2,22 @@
 % Please edit documentation in R/metrics.R
 \name{compute_sales_metrics}
 \alias{compute_sales_metrics}
-\title{Compute sales metrics}
+\title{Oblicz biznesowe metryki sprzedazy}
 \usage{
-compute_sales_metrics(df)
+compute_sales_metrics(df, ma_window = 7)
 }
 \arguments{
-\item{df}{dataframe}
+\item{df}{ramka danych ze sprzedaza (kolumny date, sales, onpromotion).}
+
+\item{ma_window}{okno sredniej kroczacej w dniach (domyslnie 7).}
 }
 \value{
-tibble
+lista: \code{summary} (tibble z metrykami) oraz \code{daily}
+  (tibble: date, sales, moving_avg).
 }
 \description{
-Compute sales metrics
+Funkcja najpierw agreguje dane do jednego szeregu dziennego (suma sprzedazy
+na date), dzieki czemu dziala poprawnie zarowno dla pojedynczego sklepu/
+kategorii, jak i dla calego panelu. Zwraca metryki zbiorcze oraz szereg
+dzienny ze srednia kroczaca (zeby srednia krocząca nie byla wyrzucana).
 }

@@ -2,16 +2,25 @@
 % Please edit documentation in R/forecast.R
 \name{create_prognosis}
 \alias{create_prognosis}
-\title{Create sales forecast}
+\title{Prognoza sprzedazy: ARIMA + Prophet}
 \usage{
-create_prognosis(df)
+create_prognosis(df, h = 30, freq = 7)
 }
 \arguments{
-\item{df}{dataframe}
+\item{df}{ramka danych ze sprzedaza (date, sales).}
+
+\item{h}{horyzont prognozy w dniach (domyslnie 30).}
+
+\item{freq}{czestotliwosc sezonowa dla ARIMA (domyslnie 7 = tydzien).}
 }
 \value{
-list
+lista: \code{arima} (forecast), \code{prophet} (predict),
+  \code{history} (szereg historyczny) oraz \code{comparison}
+  (tibble: date, arima, prophet dla okresu prognozy).
 }
 \description{
-Create sales forecast
+Najpierw agreguje dane do jednego regularnego szeregu dziennego (suma
+sprzedazy na date, uzupelnienie brakujacych dni zerami), a nastepnie buduje
+dwie prognozy: ARIMA (auto.arima) i Prophet. Zwraca tez wspolna tabele do
+porownania obu metod.
 }

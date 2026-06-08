@@ -2,16 +2,33 @@
 % Please edit documentation in R/load_data.R
 \name{load_sales_data}
 \alias{load_sales_data}
-\title{Load sales data}
+\title{Wczytaj dane sprzedazowe (opcjonalnie wzbogacone o sklepy i swieta)}
 \usage{
-load_sales_data(path)
+load_sales_data(
+  sales_path,
+  stores_path = NULL,
+  holidays_path = NULL,
+  n_max = Inf
+)
 }
 \arguments{
-\item{path}{path to CSV file}
+\item{sales_path}{sciezka do pliku CSV ze sprzedaza (kolumny:
+id, date, store_nbr, family, sales, onpromotion).}
+
+\item{stores_path}{opcjonalna sciezka do stores.csv. Jesli podana,
+dolaczane sa kolumny city, state, type, cluster.}
+
+\item{holidays_path}{opcjonalna sciezka do holidays_events.csv. Jesli
+podana, dodawana jest kolumna logiczna \code{is_holiday}.}
+
+\item{n_max}{maksymalna liczba wierszy do wczytania (domyslnie wszystkie).
+Przydatne do szybkich testow na probce duzego pliku.}
 }
 \value{
-tibble
+tibble z danymi sprzedazowymi.
 }
 \description{
-Load sales data
+Wczytuje plik sprzedazy (train.csv) i, jesli podano sciezki, dolacza
+metadane sklepow (miasto/stan/typ/klaster) oraz flage swieta. Dzieki
+temu pozniejsze funkcje moga grupowac po metadanych (miasto, stan, typ).
 }

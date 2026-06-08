@@ -2,16 +2,19 @@
 % Please edit documentation in R/validate.R
 \name{validate_sales_ts}
 \alias{validate_sales_ts}
-\title{Validate sales time series}
+\title{Sprawdz jakosc danych szeregu czasowego sprzedazy}
 \usage{
 validate_sales_ts(df)
 }
 \arguments{
-\item{df}{dataframe}
+\item{df}{ramka danych ze sprzedaza.}
 }
 \value{
-list with quality report
+lista z raportem jakosci; pole \code{ok} mowi, czy nie ma powaznych
+  problemow.
 }
 \description{
-Validate sales time series
+Kontrola dostosowana do danych panelowych (wiele sklepow i kategorii na te
+sama date). Sprawdza braki, duplikaty klucza (date, store_nbr, family),
+poprawnosc dat, zakres wartosci oraz spojnosc czestotliwosci (luki w dniach).
 }

@@ -2,16 +2,38 @@
 % Please edit documentation in R/clean.R
 \name{clean_sales_ts}
 \alias{clean_sales_ts}
-\title{Clean sales data}
+\title{Wyczysc i przygotuj dane sprzedazowe}
 \usage{
-clean_sales_ts(df)
+clean_sales_ts(
+  df,
+  fill_missing = c("zero", "interpolate", "none"),
+  dedupe = TRUE,
+  sort = TRUE,
+  aggregate = c("none", "weekly", "monthly"),
+  group_keys = c("store_nbr", "family")
+)
 }
 \arguments{
-\item{df}{dataframe}
+\item{df}{ramka danych ze sprzedaza.}
+
+\item{fill_missing}{sposob uzupelniania brakow w \code{sales}:
+"zero" (domyslnie - brak najczesciej oznacza zamkniety sklep),
+"interpolate" (interpolacja liniowa), "none" (zostaw NA).}
+
+\item{dedupe}{czy usuwac duplikaty klucza (date, store_nbr, family). Domyslnie TRUE.}
+
+\item{sort}{czy sortowac wg grupy i daty. Domyslnie TRUE.}
+
+\item{aggregate}{agregacja czasowa: "none" (domyslnie), "weekly", "monthly".}
+
+\item{group_keys}{kolumny definiujace pojedynczy szereg. Domyslnie
+c("store_nbr", "family").}
 }
 \value{
-cleaned dataframe
+wyczyszczona tibble.
 }
 \description{
-Clean sales data
+Obsluguje braki, duplikaty dat, sortowanie i (opcjonalnie) agregacje czasowa.
+Wszystkie operacje sa wykonywane W RAMACH grupy (sklep + kategoria), zeby nie
+mieszac szeregow roznych sklepow/kategorii.
 }

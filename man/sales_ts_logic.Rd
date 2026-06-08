@@ -2,20 +2,40 @@
 % Please edit documentation in R/logic.R
 \name{sales_ts_logic}
 \alias{sales_ts_logic}
-\title{Sales analysis pipeline}
+\title{Zastosuj funkcje analityczna na podzbiorach wg metadanych i czasu}
 \usage{
-sales_ts_logic(df, store = NULL, family = NULL)
+sales_ts_logic(
+  df,
+  by = "store_nbr",
+  fun = compute_sales_metrics,
+  date_range = NULL,
+  ...
+)
 }
 \arguments{
-\item{df}{dataframe}
+\item{df}{ramka danych ze sprzedaza (najlepiej z dolaczonymi metadanymi sklepow).}
 
-\item{store}{optional store id}
+\item{by}{nazwa kolumny metadanych, po ktorej dzielimy dane
+(np. "city", "state", "type", "store_nbr", "family").}
 
-\item{family}{optional product category}
+\item{fun}{funkcja stosowana do kazdego podzbioru. Domyslnie
+\code{compute_sales_metrics}. Mozna podac np. \code{plot_sales_trends}.}
+
+\item{date_range}{opcjonalny wektor dwoch dat c(od, do) ograniczajacy okres.}
+
+\item{...}{dodatkowe argumenty przekazywane do \code{fun}.}
 }
 \value{
-list
+nazwana lista: jeden element na kazda wartosc zmiennej \code{by}.
 }
 \description{
-Sales analysis pipeline
+Funkcja WYZSZEGO RZEDU: przyjmuje funkcje \code{fun} jako argument i stosuje
+ja osobno do kazdego podzbioru danych wyznaczonego przez wybrana zmienna
+metadanych (np. miasto, stan, typ sklepu, kategoria). Opcjonalnie ogranicza
+dane do zadanego przedzialu czasu. Zwraca nazwana liste wynikow.
+}
+\details{
+Dzieki przekazywaniu funkcji jako argumentu mozna jednym wywolaniem policzyc
+metryki (compute_sales_metrics) ALBO narysowac wykresy (plot_sales_trends)
+dla wszystkich miast/typow/itd.
 }
