@@ -1,5 +1,3 @@
-<div align="center">
-
 # 📊 salesToolkit
 
 **Od surowych danych sprzedażowych do decyzji biznesowych — w jednym pakiecie R.**
@@ -24,7 +22,7 @@ danych. salesToolkit zamyka cały ten proces w spójnym zestawie funkcji:
 
 ---
 
-## Instalacja
+## 📦 Instalacja
 
 ```r
 # install.packages("devtools")
@@ -42,37 +40,36 @@ devtools::load_all(".")
 
 ---
 
-## Szybki start
+## ⚙️ Przykładowe użycie
 
 ```r
 library(salesToolkit)
 
-# Wczytanie danych (z metadanymi sklepów i świętami)
-sprzedaz <- load_sales_data(
-  sales_path    = "train.csv",
-  stores_path   = "stores.csv",
-  holidays_path = "holidays_events.csv",
-  n_max         = 3e5
-)
-
-# Kontrola jakości i czyszczenie
+# 1. Wczytanie, walidacja, czyszczenie
+sprzedaz <- load_sales_data("train.csv", "stores.csv", "holidays_events.csv", n_max = 3e5)
 validate_sales_ts(sprzedaz)
 dane <- clean_sales_ts(sprzedaz, fill_missing = "zero")
 
-# Wskaźniki, wizualizacja, podsumowanie
+# 2. Metryki biznesowe
 compute_sales_metrics(dane)$summary
-plot_sales_trends(dane, group = "type", title = "Sprzedaż wg formatu sklepu")
+
+# 3. Wizualizacja
+plot_sales_trends(dane, group = "type", title = "Sprzedaż wg typu sklepu")
+
+# 4. Podsumowanie dla menedżera
 create_management_summary(dane, recent_days = 30)
 
-# Prognoza 30-dniowa: ARIMA vs Prophet
+# 5: analiza wg metadanych + prognoza
+sales_ts_logic(dane, by = "type", fun = compute_sales_metrics)
 create_prognosis(dane, h = 30)$comparison
 ```
 
-Pełny scenariusz end-to-end: [`inst/examples/full_workflow.R`](inst/examples/full_workflow.R).
+Pełny scenariusz end-to-end:
+[`inst/examples/full_workflow.R`](inst/examples/full_workflow.R).
 
 ---
 
-## Funkcje
+## 🧩 Funkcje
 
 ### Dane: wczytanie i jakość
 
@@ -104,7 +101,7 @@ Pełny scenariusz end-to-end: [`inst/examples/full_workflow.R`](inst/examples/fu
 
 ---
 
-## Raport
+## 📈 Raport
 
 Gotowy do wyrenderowania raport analityczny — trendy sprzedaży, skuteczność
 promocji, porównanie formatów sklepów oraz prognoza ARIMA vs Prophet:
@@ -120,7 +117,7 @@ Plik źródłowy: `inst/report/sales_report.Rmd`.
 
 ---
 
-## Źródło danych
+## 🗂️ Źródło danych
 
 Pakiet jest dostosowany do struktury danych
 [**Store Sales — Time Series Forecasting**](https://www.kaggle.com/competitions/store-sales-time-series-forecasting) (Kaggle).
@@ -133,22 +130,6 @@ Pakiet jest dostosowany do struktury danych
 
 > ⚠️ Pliki z danymi nie są dołączone do pakietu ze względu na rozmiar.
 > Wskaż ich lokalizację w argumentach `*_path`.
-
----
-
-## Struktura projektu
-
-```
-salesToolkit/
-├── R/                  # funkcje pakietu
-├── man/                # dokumentacja (roxygen2)
-├── inst/
-│   ├── examples/       # przykładowy workflow
-│   └── report/         # raport analityczny (R Markdown)
-├── DESCRIPTION
-├── NAMESPACE
-└── README.md
-```
 
 ---
 
