@@ -24,24 +24,19 @@ clean_sales_ts <- function(df,
                            sort = TRUE,
                            aggregate = c("none", "weekly", "monthly"),
                            group_keys = c("store_nbr", "family")) {
-
   fill_missing <- match.arg(fill_missing)
   aggregate    <- match.arg(aggregate)
-
   # uzywamy tylko tych kluczy, ktore faktycznie sa w danych
   group_keys <- intersect(group_keys, names(df))
-
   # 1. duplikaty klucza (date + grupy) - zostawiamy pierwszy wpis
   if (dedupe) {
     df <- dplyr::distinct(df, dplyr::across(dplyr::all_of(c("date", group_keys))),
                           .keep_all = TRUE)
   }
-
   # 2. sortowanie wg grupy i daty
   if (sort) {
     df <- dplyr::arrange(df, dplyr::across(dplyr::all_of(c(group_keys, "date"))))
   }
-
   # 3. uzupelnianie brakow - zawsze w obrebie grupy
   if (fill_missing != "none" && length(group_keys) > 0) {
     df <- dplyr::group_by(df, dplyr::across(dplyr::all_of(group_keys)))
@@ -50,24 +45,35 @@ clean_sales_ts <- function(df,
     } else if (fill_missing == "interpolate") {
       df <- dplyr::mutate(
         df,
-        sales = zoo::na.approx(sales, na.rm = FALSE)
+        sales = if (sum(!is.na(sales)) >= 2) {
+          zoo::na.approx(sales, na.rm = FALSE, rule = 2)
+        } else {
+          sales
+        }
       )
     }
     df <- dplyr::ungroup(df)
   }
-
   # 4. agregacja czasowa (tygodniowa / miesieczna)
   if (aggregate != "none") {
     unit <- if (aggregate == "weekly") "week" else "month"
-    df <- df %>%
-      dplyr::mutate(date = lubridate::floor_date(date, unit)) %>%
-      dplyr::group_by(dplyr::across(dplyr::all_of(c("date", group_keys)))) %>%
-      dplyr::summarise(
+    has_promo <- "onpromotion" %in% names(df)
+    df <- dplyr::mutate(df, date = lubridate::floor_date(date, unit))
+    df <- dplyr::group_by(df, dplyr::across(dplyr::all_of(c("date", group_keys))))
+    if (has_promo) {
+      df <- dplyr::summarise(
+        df,
         sales = sum(sales, na.rm = TRUE),
         onpromotion = sum(onpromotion, na.rm = TRUE),
         .groups = "drop"
       )
+    } else {
+      df <- dplyr::summarise(
+        df,
+        sales = sum(sales, na.rm = TRUE),
+        .groups = "drop"
+      )
+    }
   }
-
   df
 }

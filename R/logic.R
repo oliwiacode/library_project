@@ -15,6 +15,7 @@
 #' @param fun funkcja stosowana do kazdego podzbioru. Domyslnie
 #'   \code{compute_sales_metrics}. Mozna podac np. \code{plot_sales_trends}.
 #' @param date_range opcjonalny wektor dwoch dat c(od, do) ograniczajacy okres.
+#'   Akceptuje obiekty Date lub teksty w formacie "RRRR-MM-DD".
 #' @param ... dodatkowe argumenty przekazywane do \code{fun}.
 #' @return nazwana lista: jeden element na kazda wartosc zmiennej \code{by}.
 #' @importFrom dplyr filter
@@ -25,18 +26,17 @@ sales_ts_logic <- function(df,
                            fun = compute_sales_metrics,
                            date_range = NULL,
                            ...) {
-
   stopifnot(by %in% names(df))
   fun <- match.fun(fun)                       # akceptuj nazwe funkcji lub funkcje
-
   # ograniczenie czasu ("i czasie" z wymagan)
   if (!is.null(date_range)) {
+    date_range <- as.Date(date_range)         # akceptuj teksty "RRRR-MM-DD" lub Date
     df <- dplyr::filter(df, date >= date_range[1], date <= date_range[2])
   }
-
   # podzial na podzbiory wg wybranej zmiennej metadanych
-  groups <- split(df, df[[by]])
-
+  # drop = TRUE: pomijamy puste grupy (np. nieuzywane poziomy faktora),
+  # zeby nie przekazywac do fun() ramek z 0 wierszami
+  groups <- split(df, df[[by]], drop = TRUE)
   # serce funkcji wyzszego rzedu: zastosuj PRZEKAZANA funkcje do kazdego podzbioru
   purrr::map(groups, function(subset_df) fun(subset_df, ...)) %>%
     purrr::set_names(names(groups))

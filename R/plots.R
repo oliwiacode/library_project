@@ -15,25 +15,22 @@
 #' @export
 plot_sales_trends <- function(df, group = NULL, smooth = TRUE,
                               title = "Trend sprzedazy") {
-
   group_cols <- if (is.null(group)) "date" else c("date", group)
-
   agg <- df %>%
     dplyr::group_by(dplyr::across(dplyr::all_of(group_cols))) %>%
     dplyr::summarise(sales = sum(sales, na.rm = TRUE), .groups = "drop")
-
   if (is.null(group)) {
-    p <- ggplot2::ggplot(agg, ggplot2::aes(x = date, y = sales))
+    p <- ggplot2::ggplot(agg, ggplot2::aes(x = .data$date, y = .data$sales))
   } else {
     p <- ggplot2::ggplot(
       agg,
-      ggplot2::aes(x = date, y = sales, colour = .data[[group]])
+      ggplot2::aes(x = .data$date, y = .data$sales, colour = .data[[group]])
     )
   }
-
   p <- p + ggplot2::geom_line(alpha = 0.7)
-  if (smooth) p <- p + ggplot2::geom_smooth(se = FALSE)
-
+  if (smooth) {
+    p <- p + ggplot2::geom_smooth(se = FALSE, method = "gam", formula = y ~ s(x))
+  }
   p +
     ggplot2::theme_minimal() +
     ggplot2::labs(title = title, x = "Data", y = "Sprzedaz", colour = group)

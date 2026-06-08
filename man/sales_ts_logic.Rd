@@ -21,7 +21,8 @@ sales_ts_logic(
 \item{fun}{funkcja stosowana do kazdego podzbioru. Domyslnie
 \code{compute_sales_metrics}. Mozna podac np. \code{plot_sales_trends}.}
 
-\item{date_range}{opcjonalny wektor dwoch dat c(od, do) ograniczajacy okres.}
+\item{date_range}{opcjonalny wektor dwoch dat c(od, do) ograniczajacy okres.
+Akceptuje obiekty Date lub teksty w formacie "RRRR-MM-DD".}
 
 \item{...}{dodatkowe argumenty przekazywane do \code{fun}.}
 }

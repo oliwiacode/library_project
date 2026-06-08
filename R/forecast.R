@@ -11,15 +11,13 @@
 #' @return lista: \code{arima} (forecast), \code{prophet} (predict),
 #'   \code{history} (szereg historyczny) oraz \code{comparison}
 #'   (tibble: date, arima, prophet dla okresu prognozy).
-#' @importFrom dplyr group_by summarise arrange mutate select left_join filter
-#' @importFrom tidyr complete
+#' @importFrom dplyr group_by summarise arrange mutate select right_join
 #' @importFrom forecast auto.arima forecast
 #' @importFrom prophet prophet make_future_dataframe
 #' @export
 create_prognosis <- function(df, h = 30, freq = 7) {
 
   # 1. jeden regularny szereg dzienny (kluczowa poprawka wzgledem panelu)
-  # 1. jeden regularny szereg dzienny
   history <- df %>%
     dplyr::group_by(date) %>%
     dplyr::summarise(sales = sum(sales, na.rm = TRUE), .groups = "drop") %>%

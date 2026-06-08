@@ -11,13 +11,13 @@ Authors@R: c(
 Description: Tools for loading, cleaning, analyzing and forecasting sales time series data used in retail analytics.
 License: MIT + file LICENSE
 Encoding: UTF-8
-LazyData: true
 Imports:
     dplyr,
     tidyr,
     readr,
     lubridate,
     ggplot2,
+    mgcv,
     zoo,
     purrr,
     rlang,

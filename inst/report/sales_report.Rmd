@@ -7,7 +7,7 @@ params:
   sales_path: "../../train.csv"
   stores_path: "../../stores.csv"
   holidays_path: "../../holidays_events.csv"
-  n_max: 300000
+  n_max: 3000000
 ---
 
 ```{r setup, include=FALSE}

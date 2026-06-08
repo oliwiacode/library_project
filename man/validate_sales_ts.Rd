@@ -11,10 +11,18 @@ validate_sales_ts(df)
 }
 \value{
 lista z raportem jakosci; pole \code{ok} mowi, czy nie ma powaznych
-  problemow.
+  problemow. Zawiera tez \code{n_series} (liczba szeregow sklep-kategoria)
+  oraz \code{panel_completeness} (udzial faktycznych obserwacji w stosunku do
+  pelnego panelu: n_series x liczba dni w zakresie).
 }
 \description{
 Kontrola dostosowana do danych panelowych (wiele sklepow i kategorii na te
 sama date). Sprawdza braki, duplikaty klucza (date, store_nbr, family),
-poprawnosc dat, zakres wartosci oraz spojnosc czestotliwosci (luki w dniach).
+poprawnosc dat, zakres wartosci oraz spojnosc czestotliwosci.
+}
+\details{
+Uwaga dotyczaca luk: \code{has_date_gaps} sprawdza, czy w kalendarzu calego
+zbioru wystepuja dni bez ani jednego rekordu (luka globalna). Nie wykrywa
+dziur w pojedynczym szeregu sklep-kategoria - do oceny kompletnosci panelu
+sluzy osobny wskaznik \code{panel_completeness}.
 }
