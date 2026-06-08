@@ -10,7 +10,7 @@
 #    1. Zainstaluj pakiet:  devtools::install()
 #       (lub podczas pracy nad pakietem odkomentuj load_all ponizej)
 #    2. Wskaz wlasne sciezki do plikow CSV (sekcja "Dane wejsciowe").
-#    3. Uruchom skrypt w calosci lub krok po kroku.
+#    3. Uruchom skrypt w calosci lub krok po kroku
 # =====================================================================
 
 # devtools::load_all(".")   # alternatywa dla install() podczas developmentu
