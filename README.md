@@ -1,5 +1,3 @@
-<div align="center">
-
 # 📊 salesToolkit
 
 **Od surowych danych sprzedażowych do decyzji biznesowych — w jednym pakiecie R.**
