@@ -45,21 +45,21 @@ devtools::load_all(".")
 ```r
 library(salesToolkit)
 
-# 1-3. Wczytanie, walidacja, czyszczenie
+# 1. Wczytanie, walidacja, czyszczenie
 sprzedaz <- load_sales_data("train.csv", "stores.csv", "holidays_events.csv", n_max = 3e5)
 validate_sales_ts(sprzedaz)
 dane <- clean_sales_ts(sprzedaz, fill_missing = "zero")
 
-# 4. Metryki biznesowe
+# 2. Metryki biznesowe
 compute_sales_metrics(dane)$summary
 
-# 5. Wizualizacja
+# 3. Wizualizacja
 plot_sales_trends(dane, group = "type", title = "Sprzedaż wg typu sklepu")
 
-# 6. Podsumowanie dla menedżera
+# 4. Podsumowanie dla menedżera
 create_management_summary(dane, recent_days = 30)
 
-# Poziom 3: analiza wg metadanych + prognoza
+# 5: analiza wg metadanych + prognoza
 sales_ts_logic(dane, by = "type", fun = compute_sales_metrics)
 create_prognosis(dane, h = 30)$comparison
 ```
