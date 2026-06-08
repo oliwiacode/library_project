@@ -6,17 +6,8 @@
 
 salesToolkit to wewnętrzne narzędzie analityczne dla zespołów handlu detalicznego.
 Wczytuje, porządkuje i bada dane sprzedażowe w czasie, liczy kluczowe wskaźniki,
-buduje wizualizacje i prognozy — tak, żeby analityk mógł skupić się na wnioskach,
+buduje wizualizacje i prognozy - tak, żeby analityk mógł skupić się na wnioskach,
 a nie na technikaliach.
-
-<br>
-
-![R](https://img.shields.io/badge/R-%E2%89%A5%204.0-276DC3?logo=r&logoColor=white)
-![Wersja](https://img.shields.io/badge/wersja-0.2.0-success)
-![Licencja](https://img.shields.io/badge/licencja-MIT-blue)
-![Status](https://img.shields.io/badge/status-aktywny-brightgreen)
-
-</div>
 
 ---
 
